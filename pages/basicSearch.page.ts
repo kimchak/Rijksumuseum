@@ -18,10 +18,6 @@ export class BasicSearchPage extends BasePage {
         await super.acceptCookies()
     }
 
-    async directSearch(urlParameters: string) {
-        await this.page.goto(urlParameters)
-    }
-
     async search(keyword: string) {
         await this.searchInput.fill(keyword)
         await this.searchButton.click()

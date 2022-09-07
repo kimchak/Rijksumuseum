@@ -15,6 +15,10 @@ export class SearchResultsPage extends BasePage {
         this.addCollection = new AddToCollectionPage(page)
     }
 
+    async navigateToUrlQuery(urlQueryParameters: string) {
+            await this.page.goto(urlQueryParameters)
+    }
+
     async addNthObjectToCollection(index: number) {
         await this.resultTiles.nth(index).hover()
         await this.resultTiles.nth(index).locator('[data-role="media-actions add-object-to-set"]').click()

@@ -49,14 +49,13 @@ test.describe('Rijksmuseum UI tests', () => {
 
     test('Add 3 art pieces to a collection then remove collection', async ({page}) => {
         const login = new LoginPage(page)
-        const search = new BasicSearchPage(page)
         const results = new SearchResultsPage(page)
         const collections = new CollectionsPage(page)
         const collectionName = Date.now().toString(36)
 
         await login.login()
 
-        await search.directSearch('en/search?p=1&ps=12&f.principalMakers.name.sort=Rembrandt+van+Rijn&st=Objects')
+        await results.navigateToUrlQuery('en/search?p=1&ps=12&f.principalMakers.name.sort=Rembrandt+van+Rijn&st=Objects')
         await results.makeACollection(collectionName,3)
         await collections.navigate()
         await expect(await collections.numberOfElementsInCollection(collectionName)).toEqual(3)
