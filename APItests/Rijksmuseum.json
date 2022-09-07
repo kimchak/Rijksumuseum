@@ -152,6 +152,59 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Art objects possesed in a given period",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://www.rijksmuseum.nl/api/oai/{{api-key}}?verb=ListRecords&metadataPrefix=edm_dc&from=2021-01-01&until=2021-03-01",
+          "protocol": "http",
+          "host": [
+            "www",
+            "rijksmuseum",
+            "nl"
+          ],
+          "path": [
+            "api",
+            "oai",
+            "{{api-key}}"
+          ],
+          "query": [
+            {
+              "key": "verb",
+              "value": "ListRecords"
+            },
+            {
+              "key": "metadataPrefix",
+              "value": "edm_dc"
+            },
+            {
+              "key": "from",
+              "value": "2021-01-01"
+            },
+            {
+              "key": "until",
+              "value": "2021-03-01"
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ],
   "event": [
