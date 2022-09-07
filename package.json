@@ -1,10 +1,11 @@
 {
-  "name": "Rijksmuseum",
+  "name": "rijksmuseum",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test",
+    "test:api": "newman run './APItests/Rijksmuseum.json'"
   },
   "keywords": [],
   "author": "",

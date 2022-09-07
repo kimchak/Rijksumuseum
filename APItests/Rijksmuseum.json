@@ -1,0 +1,189 @@
+{
+  "info": {
+    "_postman_id": "cfe40603-df2e-425d-9f2d-641af04d1f5d",
+    "name": "Rijksmuseum",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19836225"
+  },
+  "item": [
+    {
+      "name": "Art by Rembrandt van Rijn",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Search response contains at least 10 entries\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.count).to.be.greaterThan(9)",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "basic"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}?key={{api-key}}&involvedMaker=Rembrandt+van+Rijn",
+          "host": [
+            "{{url}}"
+          ],
+          "query": [
+            {
+              "key": "key",
+              "value": "{{api-key}}"
+            },
+            {
+              "key": "involvedMaker",
+              "value": "Rembrandt+van+Rijn"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Art from 17th century Hilversum",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Search response contains The Feast of St Nicholas\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.artObjects[0].title).to.contain('The Feast of St Nicholas')",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{url}}?key={{api-key}}&q=Hilversum&material=canvas&yearfrom=1600&yearto=1700",
+          "host": [
+            "{{url}}"
+          ],
+          "query": [
+            {
+              "key": "key",
+              "value": "{{api-key}}"
+            },
+            {
+              "key": "q",
+              "value": "Hilversum"
+            },
+            {
+              "key": "material",
+              "value": "canvas"
+            },
+            {
+              "key": "yearfrom",
+              "value": "1600"
+            },
+            {
+              "key": "yearto",
+              "value": "1700"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Details of The Milkmaid",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Validate location and creation date\", function () {",
+              "    var jsonData = pm.response.json();",
+              "    pm.expect(jsonData.artObject.location).to.equal('HG-2.30.3')",
+              "    pm.expect(jsonData.artObject.dating.presentingDate).to.equal('c. 1660')",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://www.rijksmuseum.nl/api/en/collection/SK-A-2344?key={{api-key}}",
+          "protocol": "https",
+          "host": [
+            "www",
+            "rijksmuseum",
+            "nl"
+          ],
+          "path": [
+            "api",
+            "en",
+            "collection",
+            "SK-A-2344"
+          ],
+          "query": [
+            {
+              "key": "key",
+              "value": "{{api-key}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "api-key",
+      "value": "yMom9Xis",
+      "type": "string"
+    },
+    {
+      "key": "url",
+      "value": "https://www.rijksmuseum.nl/api/en/collection/",
+      "type": "string"
+    }
+  ]
+}
