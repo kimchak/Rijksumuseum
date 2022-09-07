@@ -9,7 +9,7 @@ import {
 import {AdvancedSearchPage} from "../pages/advancedSearch.page";
 
 
-test.describe('Rijksmuseum regression tests', () => {
+test.describe('Rijksmuseum UI tests', () => {
     // test.skip(async ({page}) => {
     //     const login = new LoginPage(page)
     //     await login.navigate()
@@ -39,14 +39,15 @@ test.describe('Rijksmuseum regression tests', () => {
         await advancedSearch.searchButton.click()
     })
 
-    test('Validate details of The Milkmaid', async ({page}) => {
+    test.only('Validate details of The Milkmaid', async ({page}) => {
         const artPiece = new ArtPiecePage(page)
         await artPiece.navigateToArtId('SK-A-2344')
         await artPiece.viewDetails()
         await artPiece.validateArtCreationDateIs('c. 1660')
+        await artPiece.validateLocationIs('Gallery of Honour')
     })
 
-    test.only('Add 3 art pieces to a collection', async ({page}) => {
+    test('Add 3 art pieces to a collection then remove collection', async ({page}) => {
         const login = new LoginPage(page)
         const search = new BasicSearchPage(page)
         const results = new SearchResultsPage(page)
