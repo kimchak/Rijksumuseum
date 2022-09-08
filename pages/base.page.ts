@@ -5,11 +5,15 @@ export class BasePage {
     public readonly acceptCookiesButton: Locator
     public readonly cookiePopup: Locator
     public readonly userAvatar: Locator
+    public readonly closeOnboardingPopup: Locator
+    public readonly onboardingPopup: Locator
 
     constructor(page: Page) {
         this.page = page
         this.acceptCookiesButton = page.locator('button[value="Accept"]')
         this.cookiePopup = page.locator('[data-role="cookie-bar"]')
+        this.onboardingPopup = page.locator('[data-role="tour-template"]:visible')
+        this.closeOnboardingPopup = page.locator('[data-role="tour-template"] [data-role="lightbox-close"]:visible')
     }
 
     async acceptCookies() {
@@ -19,9 +23,14 @@ export class BasePage {
         }
     }
 
+    async dismissOnboarding() {
+        if (await this.onboardingPopup.isVisible()) {
+            await this.closeOnboardingPopup.click()
+        }
+    }
+
     async navigate(urlSuffix='') {
         await this.page.goto(urlSuffix)
         await this.acceptCookies()
     }
 }
-
