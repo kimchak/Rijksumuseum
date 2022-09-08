@@ -48,15 +48,11 @@ The project-specific security login credentials are stored safely in Github envi
 - Wait until tests completes and see the results in the workflow
 
 ## Challenges and further improvements
-- Flaky > set retries
-- no ids
-- bugged advanced search
-- login
-- 
-The tests are meant to be a starting point for building a more extensive tests suite, however 
-they do provide feedback about the condition of basic/core features. We only test the buy/koop part of the
-system, since the functionality of the rental part is very similar to it.
-In case of the search mechanism, UI tests have been implemented here, but generally it's better to test this feature on an integration/unit test level.
-The suite can be extended, adding more tests covering more specific use cases.
-One of the challenges with the automation was that a lot of elements didn't have unique ids or data-test-ids. Instead some vue-specific attributes were used. It would be recommended to provide those additional ids, in order to enhance stability. This can be easily done by a front-end or a QA developer with access to the front-end repository. 
 
+Rijksustudio presents a few challenges for UI automation, the first one
+being the calk of automation-friendly ids and data-testids. This required some workarrounds, as many identifiers were not unique, and text selectors or css pseudo-classes like `:visible` had to be used for element selection.
+The page also seems to be having some performance issues and some tests were timing out during development. This required increasing standard timeouts from 30s to 60s per test.
+There is a bugged flow is advanced search, that does not allow the automated suite, and in some cases physical user, using the advanced search engine. The search button, instead of sending a search request clears the form data and redirects to current page.
+The workflows to achieving certain states are relatively long, which might lead to unstability, it would be much more effective to setup test data using API calls, which in this case are not publicly available.
+Presented test suite is not complete, and it would require many more tests to cover the application sufficiently.
+One improvement worth making is changing the login action to use SSO wit .ASP and saving identification tokens in browser's context. The current solution, that uses UI login increases each test's execution time and does not provide added value.
