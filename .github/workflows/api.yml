@@ -17,4 +17,4 @@ jobs:
       - name: Install newman
         run: npm install -g newman
       - name: Run Newman tests
-        run: npm run tedst:api
+        run: npm run teds:api
