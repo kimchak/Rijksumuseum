@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 env:
   EMAIL: ${{secrets.EMAIL}}
-  PASSWORD: ${{secrets.PASWORD}}
+  PASSWORD: ${{secrets.PASSWORD}}
 jobs:
   test:
     timeout-minutes: 60
